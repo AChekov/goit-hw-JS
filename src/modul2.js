@@ -128,4 +128,52 @@
 //      // Change code above this line
 //    }
 
-//============Задача 19 / 32============
+//============Задача 20 / 32============
+// Задача: подсчёт суммы покупки
+// Задание
+// Напиши функцию calculateTotalPrice(order), которая принимает один параметр order - массив чисел, и рассчитывает общую сумму его элементов. Общая сумма элементов должна сохраняться в переменной total, которая возвращается, как результат работы функции.
+
+// Тесты
+// Объявлена функция calculateTotalPrice(order)
+// Вызов функции calculateTotalPrice([12, 85, 37, 4]) возвращает 138
+// Вызов функции calculateTotalPrice([164, 48, 291]) возвращает 503
+// Вызов функции calculateTotalPrice([412, 371, 94, 63, 176]) возвращает 1116
+// Вызов функции calculateTotalPrice() со случайным массивом возвращает правильное значение
+
+// function calculateTotalPrice(order) {
+//     let total = 0;
+//     // Change code below this line
+//     for (const item of order) {
+//   total += item;
+//     }
+//     // Change code above this line
+//     return total;
+//   }
+
+//============Задача 21 / 32============
+// Задача: поиск самого длинного слова
+// Задание
+// Напиши функцию findLongestWord(string) которая принимает произвольную строку состоящую только из слов разделённых пробелом (параметр string) и возвращает самое длинное слово в этой строке.
+
+// Тесты
+// Объявлена функция findLongestWord(string)
+// Вызов функции findLongestWord("The quick brown fox jumped over the lazy dog") возвращает jumped
+// Вызов функции findLongestWord("Google do a roll") возвращает Google
+// Вызов функции findLongestWord("May the force be with you") возвращает force
+// Вызов функции findLongestWord() со случайной строкой возвращает правильное значение
+
+// function findLongestWord(string) {
+//   // Change code below this line
+//   const arrayString = string.split(" ");
+//   let longestWord = arrayString[0];
+
+//   for (let i = 0; i < arrayString.length; i += 1) {
+//     if (longestWord.length < arrayString[i].length) {
+//       longestWord = arrayString[i];
+//     }
+//   }
+//   return longestWord;
+//   // Change code above this line
+// }
+
+// console.log(findLongestWord("The quick brown fox jumped over the lazy dog"));
