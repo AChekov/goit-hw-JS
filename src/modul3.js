@@ -1138,9 +1138,7 @@
 // Задача. Массив совпадений
 // Задание
 // Функция findMatches() принимает произвольное количество аргументов. Первым аргументом всегда будет массив чисел, а остальные аргументы будут просто числами.
-
 // Дополни код функции так, чтобы она возвращала новый массив matches, в котором будут только те аргументы, начиная со второго, которые есть в массиве первого аргумента.
-
 // Например, findMatches([1, 2, 3, 4, 5], 1, 8, 2, 7) должна вернуть массив [1, 2], потому что только они есть в массиве первого аргумента.
 
 // Тесты
@@ -1163,3 +1161,143 @@
 // }
 
 //============Задача 34 / 41============
+// Методы объекта
+// До сих пор мы рассматривали объекты только как хранилища взаимосвязанных данных, например информация о книге и т. п. Объекты-хранилища обычно находятся в массиве таких же объектов, который представляет коллекцию однотипных элементов.
+// Объекты могут хранить не только данные, но и функции для работы с этими данными - методы. Если значение свойства это функция, такое свойство называется методом объекта.
+
+// // ✅ Логиески и синтаксически сгруппированные сущности
+// const bookShelf = {
+//   books: ["Последнее королевство", "Страж снов"],
+//   // Это метод объекта
+//   getBooks() {
+//     console.log("Этот метод будет возвращать все книги - свойство books");
+//   },
+//   // Это метод объекта
+//   addBook(bookName) {
+//     console.log("Этот метод будет добавлять новую книгу в свойство books");
+//   },
+// };
+
+// // Вызовы методов
+// bookShelf.getBooks();
+// bookShelf.addBook("Новая книга");
+// Такие объекты можно назвать «моделями». Они связывают данные и методы для работы с этими данными. Например, можно было объявить переменную books и две функции getBooks() и addBook(bookName), но тогда это были бы три независимые сущности без явной синтаксической, и со слабой логической связями.
+
+// // ❌ Слабосвязанные, независмые сущности
+// const books = [];
+// function getBooks() {}
+// function addBook() {}
+// Задание
+// Добавь объекту bookShelf ещё два метода, которые пока что будут возвращать просто строки по аналогии с getBooks() и addBook(bookName).
+// Метод removeBook(bookName) будет удалять книгу по имени. Возвращает строку "Deleting book <имя книги>", где <имя книги> это значение параметра bookName.
+// Метод updateBook(oldName, newName) будет обновлять название книги на новое. Возвращает строку "Updating book <старое имя> to <новое имя>", где <старое имя> и <новое имя>это значения параметров oldName и newName соотвественно.
+
+// Тесты
+// Объявлена переменная bookShelf
+// Значение переменной bookShelf это объект
+// Значение свойства bookShelf.getBooks это метод объекта
+// Вызов метода bookShelf.getBooks() возвращает строку "Возвращаем все книги"
+// Значение свойства bookShelf.addBook это метод объекта
+// Вызов метода bookShelf.addBook("Haze") возвращает строку "Adding book Haze"
+// Значение свойства bookShelf.removeBook это метод объекта
+// Вызов метода bookShelf.removeBook("Red sunset") возвращает строку "Deleting book Red sunset"
+// Значение свойства bookShelf.updateBook это метод объекта
+// Вызов метода bookShelf.updateBook("Sands of dune", "Dune") возвращает строку "Updating book Sands of dune to Dune"
+
+// const bookShelf = {
+//   // Change code below this line
+//   books: ["The last kingdom", "The guardian of dreams"],
+//   getBooks() {
+//     return "Returning all books";
+//   },
+//   addBook(bookName) {
+//     return `Adding book ${bookName}`;
+//   },
+//   removeBook(bookName) {
+//     return `Deleting book ${bookName}`;
+//   },
+//   updateBook(oldName, newName) {
+//     return `Updating book ${oldName} to ${newName}`;
+//   },
+//   // Change code above this line
+// };
+
+//============Задача 35 / 41============
+// Доступ к свойствам объекта в его методах
+// Методы используются для работы со свойствами объекта, их изменения. Для доступа к объекту в методе используется не имя переменной, например bookShelf, а ключевое слово this - контекст. Значением this будет объект перед «точкой», то есть объект который вызвал этот метод, в нашем случае это ссылка на объект bookShelf.
+
+// const bookShelf = {
+//   books: ["Последнее королевство"],
+//   getBooks() {
+//     console.log(this);
+//   },
+// };
+
+// // Перед точкой стоит объект bookShelf,
+// // поэтому при вызове метода, this будет хранить ссылку на него.
+// bookShelf.getBooks(); // {books: ["Последнее королевство"], getBooks: f}
+// Для того, чтобы получить доступ к свойствам объекта в методах, мы обращаемся к нему через this и дальше как обычно - «через точку» к свойствам.
+
+// const bookShelf = {
+//   books: ["Последнее королевство"],
+//   getBooks() {
+//     return this.books;
+//   },
+//   addBook(bookName) {
+//     this.books.push(bookName);
+//   },
+//   removeBook(bookName) {
+//     const bookIndex = this.books.indexOf(bookName);
+//     this.books.splice(bookIndex, 1);
+//   },
+// };
+
+// console.log(bookShelf.getBooks()); // []
+// bookShelf.addBook("Мгла");
+// bookShelf.addBook("Страж снов");
+// console.log(bookShelf.getBooks()); // ["Последнее королевство", "Мгла", "Страж снов"]
+// bookShelf.removeBook("Мгла");
+// console.log(bookShelf.getBooks()); // ["Последнее королевство", "Страж снов"]
+// Будет логично задуматься - почему бы не использовать при обращении к свойствам имя объекта, ведь мы явно не собираемся его менять. Дело в том, что имя объекта штука не надежная, методы одного объекта можно копировать в другой (с другим именем), а в будущем узнаем, что часто, при создании объекта мы заранее вовсе не знаем имени. Использование this гарантирует, что метод работает именно с тем объектом, который его вызвал.
+
+// Задание
+// Дополни метод updateBook(oldName, newName) так, чтобы он изменял название книги с oldName на newName в свойстве books. Используй indexOf() для того, чтобы найти нужный элемент массива, и splice() для того чтобы заменить этот элемент
+
+// Тесты
+// Объявлена переменная bookShelf
+// Значение переменной bookShelf это объект
+// Значение свойства bookShelf.updateBook это метод объекта
+// После вызова метода bookShelf.updateBook("Haze", "Dungeon chronicles"), значение свойства books это массив ["The last kingdom", "Dungeon chronicles", "The guardian of dreams"]
+// После вызова метода bookShelf.updateBook("The last kingdom", "Dune"), значение свойства books это массив ["Dune", "Haze", "The guardian of dreams"]
+
+// const bookShelf = {
+//   books: ["The last kingdom", "Haze", "The guardian of dreams"],
+//   updateBook(oldName, newName) {
+//     // Change code below this line
+//     const bookIndex = this.books.indexOf(oldName);
+//     this.books.splice(bookIndex, 1, newName);
+
+//     // Change code above this line
+//   },
+// };
+
+//============Задача 36 / 41============
+// Задача. Получаем все зелья
+// Задание
+// Добавь объекту atTheOldToad метод getPotions(), который просто возвращает значение свойства potions.
+
+// Тесты
+// Объявлена переменная atTheOldToad
+// Значение переменной atTheOldToad это объект
+// Значение свойства atTheOldToad.potions это массив ['Speed potion', 'Dragon breath', 'Stone skin']
+// Значение свойства atTheOldToad.getPotions это метод объекта
+// Вызов метода atTheOldToad.getPotions() возвращает ['Speed potion', 'Dragon breath', 'Stone skin']
+
+// const atTheOldToad = {
+//     // Change code below this line
+//     potions: ['Speed potion', 'Dragon breath', 'Stone skin'],
+//     getPotions() {
+//     return this.potions;
+//     },
+//     // Change code above this line
+//   };
